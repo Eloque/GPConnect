@@ -1,6 +1,7 @@
 from django.db import models
 import time
 
+
 class ChatMessage(models.Model):
     prompt = models.TextField ()
     response = models.TextField ()

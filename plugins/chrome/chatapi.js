@@ -61,7 +61,6 @@ function checkCommand() {
                 let nonce = response.nonce;
                 let command = response.command;
                 if (nonce > lastNonce) {
-                    console.log("Sending command: " + command);
                     giveCommand(command);
                     lastNonce = nonce;
                 }

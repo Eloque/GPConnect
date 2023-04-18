@@ -10,7 +10,7 @@ from apichat.models import ChatMessage
 def chat(request):
     if request.method == 'POST':
         prompt = request.POST.get('prompt')
-        response = 'response placeholder'
+        response = ''
         nonce = int(time.time())
         chat_message = ChatMessage(prompt=prompt, response=response, nonce=nonce)
         chat_message.save()
@@ -62,26 +62,52 @@ def response(request):
 
 
 @csrf_exempt
-def input(request):
+def set_command(request):
+
     if request.method == 'POST':
+
+        # Load the JSON data from the request
         data = json.loads(request.body)
-        # do something with the input data
-        return JsonResponse({'status': 'success'})
+        # Get the nonce from the request
+        command = data['command']
+
+        chat_message = ChatMessage(prompt=command)
+        chat_message.save()
+
+        nonce = chat_message.nonce
+        json_response = JsonResponse({'nonce': nonce})
+
     else:
-        return JsonResponse({'error': 'Invalid request method'})
+        json_response = JsonResponse({'error': 'This is a POST request only.'})
+
+    return json_response
 
 
 @csrf_exempt
-def output(request):
+def get_response(request):
+
     if request.method == 'POST':
+
+        # Load the JSON data from the request
         data = json.loads(request.body)
-        # generate the output data
-        output_data = {'result': 'Hello, ' + data['name'] + '!'}
-        return JsonResponse(output_data)
+        # Get the nonce from the request
+        nonce = data['nonce']
+
+        # Get the ChatMessage with the matching nonce
+        try:
+            chat_message = ChatMessage.objects.get(nonce=nonce)
+            json_response = JsonResponse(chat_message.response, safe=False)
+
+        except ChatMessage.DoesNotExist:
+            json_response = JsonResponse({'error': "Nonce not found"})
+
     else:
-        return JsonResponse({'error': 'Invalid request method'})
+        json_response = JsonResponse({'error': 'This is a POST request only.'})
+
+    return json_response
 
 
+@csrf_exempt
 def update_chat_message(request):
     # Get the ChatMessage object to update
     chat_message = ChatMessage.objects.last()

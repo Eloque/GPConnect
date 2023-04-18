@@ -4,10 +4,11 @@ from . import views
 app_name = 'chatapi'
 
 urlpatterns = [
-    path('input/', views.input, name='input'),
-    path('output/', views.output, name='output'),
     path('command/', views.command, name='command'),
     path('response/', views.response, name='response'),
+
+    path('get_response/', views.get_response, name='get_response'),
+    path('set_command/', views.set_command, name='set_command'),
 
     path('chat/', views.chat, name='chat'),
     path('update/', views.update_chat_message, name='update_chat_message'),
