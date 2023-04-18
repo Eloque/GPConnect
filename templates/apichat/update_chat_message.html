@@ -1,0 +1,14 @@
+<h1>Update Chat Message</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="id_prompt">Prompt:</label>
+    <textarea id="id_prompt" name="prompt" rows="5">{{ form.prompt }}</textarea>
+    <br>
+    <label for="id_response">Response:</label>
+    <textarea id="id_response" name="response" rows="5">{{ form.response }}</textarea>
+    <br>
+    <label for="id_nonce">Nonce:</label>
+    <input id="id_nonce" name="nonce" type="number" value="{{ form.nonce }}">
+    <br>
+    <input type="submit" value="Update">
+</form>

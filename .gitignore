@@ -1,0 +1,6 @@
+.idea
+# Ingore compiled PYC
+*.pyc
+*.sqlite3
+.DS_store*
+./venvPyCharm

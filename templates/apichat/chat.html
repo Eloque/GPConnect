@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+</head>
+<body>
+	<h1>Chat</h1>
+	<form method="post">
+		{% csrf_token %}
+		<label for="prompt">Enter your message:</label>
+		<input type="text" id="prompt" name="prompt" value="{{ prompt }}" required>
+		<button type="submit">Send</button>
+	</form>
+
+    <!-- chat_table.html -->
+    <table>
+      <thead>
+        <tr>
+          <th>Prompt</th>
+          <th>Response</th>
+          <th>Nonce</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for chat in chats %}
+        <tr>
+          <td>{{ chat.prompt }}</td>
+          <td>{{ chat.response }}</td>
+          <td>{{ chat.nonce }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+</body>
+</html>
