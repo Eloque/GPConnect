@@ -78,6 +78,7 @@ def set_command(request):
         json_response = JsonResponse({'nonce': nonce})
 
     else:
+        
         json_response = JsonResponse({'error': 'This is a POST request only.'})
 
     return json_response
@@ -102,7 +103,10 @@ def get_response(request):
             json_response = JsonResponse({'error': "Nonce not found"})
 
     else:
-        json_response = JsonResponse({'error': 'This is a POST request only.'})
+        chat_message = ChatMessage.objects.last()
+        nonce = chat_message.nonce
+        json_response = JsonResponse({'error': 'This is a POST request only.',
+                                      "nonce": nonce})
 
     return json_response
 
