@@ -35,6 +35,7 @@ function startInterval() {
   // Start the interval timer to call the CheckCommand function every 3 seconds
   console.log("Starting interval timer");
   console.log(`Server URL: ${url}:${port}`);
+
   intervalId = setInterval(checkCommand, 3000);
 }
 
@@ -65,7 +66,7 @@ function checkCommand() {
                     lastNonce = nonce;
                 }
 
-                console.log("Checking for command again in 3 seconds");
+                // console.log("Checking for command again in 3 seconds");
 
             }
         };
@@ -74,7 +75,7 @@ function checkCommand() {
 }
 
 function giveCommand(command) {
-    console.log("Received command: " + command);
+    // console.log("Received command: " + command);
 
     // Get a list of all the buttons on a page
     var buttons = document.getElementsByTagName('button');
@@ -112,13 +113,12 @@ function clickSubmit() {
 function CheckIfCommandProcessed() {
     var buttons = document.getElementsByTagName('button');
     var text = buttons[buttons.length - 2].innerText;
-    console.log("Generate button text is: " + text);
+    // console.log("Generate button text is: " + text);
 
     if (text == "Regenerate response") {
-        console.log("Response is done, going back...");
+        // console.log("Response is done, going back...");
 
         if (waitingForResponse === true) {
-            console.log("Do it get here?");
             ReturnResponse();
         }
 
@@ -127,14 +127,14 @@ function CheckIfCommandProcessed() {
     }
     else
     {
-        console.log("Response is pending, waiting..");
+        // console.log("Response is pending, waiting..");
         return false;
     }
 }
 
 function ReturnResponse() {
 
-    console.log("JSONifying response");
+    // console.log("JSONifying response");
 
     // Get all elements with class "group w-full text-gray-800"
     const elements = document.getElementsByClassName("group w-full text-gray-800");
@@ -160,5 +160,5 @@ function ReturnResponse() {
     // Send the JSON data
     xhr.send(json);
 
-    console.log("Sending response: " + json);
+    // console.log("Sending response: " + json);
 }

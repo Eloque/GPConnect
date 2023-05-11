@@ -6,21 +6,26 @@ import time
 
 from apichat.models import ChatMessage
 
-
 def chat(request):
     if request.method == 'POST':
         prompt = request.POST.get('prompt')
-        response = ''
         nonce = int(time.time())
-        chat_message = ChatMessage(prompt=prompt, response=response, nonce=nonce)
+        chat_message = ChatMessage(prompt=prompt, nonce=nonce)
         chat_message.save()
+
+        # We should wait for the response to be updated
+        while chat_message.response == '':
+            time.sleep(1)
+            chat_message = ChatMessage.objects.get(nonce=nonce)
+
     else:
         prompt = ''
 
-    # Return a list of all chats, in reverse order
-    chats = ChatMessage.objects.all().order_by('-id')
+    # Return a list of 10 chats, in reverse order
+    chats = ChatMessage.objects.all().order_by('-id')[:10]
 
     return render(request, 'apichat/chat.html', {'prompt': prompt, 'chats': chats})
+
 
 # This is the command that is about to be send to ChatPlug
 @csrf_exempt
@@ -132,3 +137,6 @@ def update_chat_message(request):
     }
 
     return render(request, 'apichat/update_chat_message.html', {'form': form})
+
+
+
