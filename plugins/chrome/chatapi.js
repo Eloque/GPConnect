@@ -61,9 +61,14 @@ function checkCommand() {
                 let response = JSON.parse(xhr.responseText);
                 let nonce = response.nonce;
                 let command = response.command;
-                if (nonce > lastNonce) {
-                    giveCommand(command);
-                    lastNonce = nonce;
+                let answered = response.answered;
+
+                if (!answered)
+                {
+                    if (nonce > lastNonce) {
+                        giveCommand(command);
+                        lastNonce = nonce;
+                    }
                 }
 
                 // console.log("Checking for command again in 3 seconds");

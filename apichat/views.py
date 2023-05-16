@@ -34,9 +34,16 @@ def command(request):
     # Get the most recent ChatMessage
     chat_message = ChatMessage.objects.last()
 
+    # check if it's answered
+    if len(chat_message.response) != 0:
+        answered = True
+    else:
+        answered = False
+
     response_data = {
         'nonce': chat_message.nonce,
         'command': chat_message.prompt,
+        'answered': answered
     }
 
     json_response = JsonResponse(response_data)
