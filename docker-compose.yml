@@ -1,0 +1,10 @@
+version: '3'
+services:
+  gpconnect:
+    build: .
+    command:  sh -c "python manage.py makemigrations &&
+                     python manage.py migrate &&
+                     python manage.py runserver 0.0.0.0:7500"
+
+    ports:
+      - "7500:7500"
