@@ -13,7 +13,11 @@ Install the extension as a regular unpacked Chrome extension. This enables the e
 In the extension options page the server and port for the endpoint can be configured. Default is port 7500 and localhost.
 
 # The API
-The Django project provides a number of endpoints to facilitate interactions with the ChatGPT.  On the ChatGPT side, for the Chrome extension to receive command send responses.
+The Django project provides a number of endpoints to facilitate interactions with the ChatGPT. The API is Dockerized, and can be started with:
+
+`docker-compose up`
+
+On the ChatGPT side, for the Chrome extension to receive command send responses.
 
 * http://127.0.0.1:7500/chatapi/command/
 * http://127.0.0.1:7500/chatapi/response/
