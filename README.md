@@ -5,7 +5,7 @@ ChatGPT is pretty awesome, but there should be an API interface to the website. 
 The extension is activated on the ChatGPT website, monitoring the chat and posting prompts. The Django project provides an API endpoint that can be used to send prompts and receive answers.
 
 ### Notes
-This is very experimental and might stop working if ChatGPT changes anything. I made so I could use ChatGPT-4 for some learning, testing and experimentation. 
+This is very experimental and might stop working if ChatGPT changes anything. I made it so I could use ChatGPT-4 for some learning, testing and experimentation. 
 
 # The Extension
 Install the extension as a regular unpacked Chrome extension. This enables the extension, to use it, on the ChatGPT site, after starting a conversation, use "Load Plugin" to activate the plugin and the "Start" and "Stop" button to start and stop the listening and posting process.
