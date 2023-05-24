@@ -54,4 +54,4 @@ The nonce can than be used to get a response
     # Make the POST request
     response = requests.post(url_base + 'chatapi/get_response/', json=payload)
 
-In addition, for testing the URL http://127.0.0.1:7500/chatapi/chat/ can be used to see previous commands and responses.
+In addition, for testing the URL http://127.0.0.1:7500 can be used to see previous commands and responses and to submit new prompts to ChatGPT.
