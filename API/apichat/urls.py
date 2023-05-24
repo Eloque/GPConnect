@@ -10,7 +10,7 @@ urlpatterns = [
     path('get_response/', views.get_response, name='get_response'),
     path('set_command/', views.set_command, name='set_command'),
 
-    path('chat/', views.chat, name='chat'),
     path('update/', views.update_chat_message, name='update_chat_message'),
 
+    path('', views.chat, name='chat'),
 ]
