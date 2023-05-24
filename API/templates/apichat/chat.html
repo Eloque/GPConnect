@@ -2,27 +2,66 @@
 
 {% block content %}
 <div class="container">
-	<h1>Chat</h1>
-	<form method="post">
-		{% csrf_token %}
-		<label for="prompt">Enter your message:</label>
-		<input type="text" id="prompt" name="prompt" value="{{ prompt }}" required>
-		<button type="submit">Send</button>
-	</form>
 
     <div class="row">
-        <div class="col-5">Prompt</div>
-        <div class="col-6">Response</div>
-        <div class="col-1">Nonce</div>
+        <div class="col-2">
+        </div>
+
+        <div class="col-10">
+            <h1>Chat</h1>
+        </div>
+
     </div>
 
-    {% for chat in chats %}
     <div class="row">
-        <div class="col-5">{{ chat.prompt }}</div>
-        <div class="col-6">{{ chat.response }}</div>
-        <div class="col-1">{{ chat.nonce }}</div>
+        <div class="col-2">
+            <div class="d-grid gap-2">
+                <a href="https://chat.openai.com/" target="_blank" class="btn btn-primary">OpenAI ChatGPT</a>
+                <a href="{% url 'chatapi:command' %}" target="_blank" class="btn btn-primary">Current Command</a>
+                <a href="{% url 'chatapi:response' %}" target="_blank" class="btn btn-primary">Current Response</a>
+            </div>
+        </div>
+
+        <div class="col-10">
+
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="d-grid gap-2">
+                    <div class="form-outline w-100">
+                        <input type="text" id="prompt" name="prompt" class="form-control" />
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </form>
+
+            <hr class="hr" />
+
+            <div class="row">
+                <div class="col-5"><b>Prompt</b></div>
+                <div class="col-6"><b>Response</b></div>
+                <div class="col-1"><b>Nonce</b></div>
+            </div>
+
+            {% for chat in chats %}
+            <hr class="hr" />
+
+                <div class="row">
+
+                    <div class="col-5"><p class="small">{{ chat.prompt }}</p></div>
+                    <div class="col-6"><p class="small">{{ chat.response }}</p></div>
+                    <div class="col-1"><p class="small">{{ chat.nonce }}</p></div>
+
+                </div>
+
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
 
 </div>
 

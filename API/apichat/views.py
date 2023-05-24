@@ -1,10 +1,11 @@
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 import time
 
 from apichat.models import ChatMessage
+
 
 def chat(request):
     if request.method == 'POST':
@@ -27,7 +28,7 @@ def chat(request):
     return render(request, 'apichat/chat.html', {'prompt': prompt, 'chats': chats})
 
 
-# This is the command that is about to be send to ChatPlug
+# This is the command that is about to be sent to ChatPlug
 @csrf_exempt
 def command(request):
 
@@ -144,6 +145,5 @@ def update_chat_message(request):
     }
 
     return render(request, 'apichat/update_chat_message.html', {'form': form})
-
 
 
