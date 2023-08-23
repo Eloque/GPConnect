@@ -51,6 +51,8 @@ var waitingForResponse = false;
 
 function checkCommand() {
 
+    console.log("Checking for command");
+
     // Check if the previous command has been processed
     if ( CheckIfCommandProcessed() == true )
     {
@@ -92,6 +94,8 @@ function giveCommand(command) {
     // This is the text input field
     var input = submitButton.previousSibling;
 
+    input = document.getElementById('prompt-textarea');
+
     // Clear the input field
     input.value = '';
 
@@ -111,16 +115,26 @@ function clickSubmit() {
   waitingForResponse = true;
 
   // the last button is the one we want to click
-  buttons[buttons.length - 1].click();
+  buttons[buttons.length - 2].click();
 
 }
 
 function CheckIfCommandProcessed() {
     var buttons = document.getElementsByTagName('button');
-    var text = buttons[buttons.length - 2].innerText;
+    var text = buttons[buttons.length - 1].innerText;
     // console.log("Generate button text is: " + text);
+    var ready = false
 
-    if (text == "Regenerate response") {
+    // loop through all the buttons
+    for (var i = 0; i < buttons.length; i++) {
+        if ( buttons[i].innerText == "Regenerate" ){
+            ready = true;
+        }
+
+    }
+
+
+    if (ready== true){
         // console.log("Response is done, going back...");
 
         if (waitingForResponse === true) {
@@ -142,7 +156,7 @@ function ReturnResponse() {
     // console.log("JSONifying response");
 
     // Get all elements with class "group w-full text-gray-800"
-    const elements = document.getElementsByClassName("group w-full text-gray-800");
+    const elements = document.getElementsByClassName("group w-full text-token-text-primary border-b");
 
     // Get the last element
     const lastElement = elements[elements.length - 1];
